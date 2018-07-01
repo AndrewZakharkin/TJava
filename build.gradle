@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'com.zakharkin'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    afterEvaluate {
+        repositories {
+            jcenter()
+        }
+    }
+
+    compileJava {
+        inputs.property("moduleName", moduleName)
+        doFirst {
+            options.compilerArgs = [
+                    '--module-path', classpath.asPath,
+            ]
+            classpath = files()
+        }
+    }
+}
+
+dependencies {
+    compile project ('MainMod')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
