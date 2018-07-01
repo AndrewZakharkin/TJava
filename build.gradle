@@ -8,8 +8,17 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.9
 targetCompatibility = 1.9
 
+ext.moduleName = 'FirstLinTest'
+
 repositories {
     mavenCentral()
+}
+
+jar {
+    inputs.property("moduleName", moduleName)
+    manifest {
+        attributes('Automatic-Module-Name': moduleName, 'Main-Class': 'com.zakharkin.FirstLinTest.Ent')
+    }
 }
 
 subprojects {
@@ -19,7 +28,7 @@ subprojects {
         }
     }
 
-    compileJava {
+    /*compileJava {
         inputs.property("moduleName", moduleName)
         doFirst {
             options.compilerArgs = [
@@ -27,7 +36,7 @@ subprojects {
             ]
             classpath = files()
         }
-    }
+    }*/
 }
 
 dependencies {

@@ -4,14 +4,25 @@ plugins {
 
 group 'com.zakharkin'
 version '1.0-SNAPSHOT'
+ext.moduleName = 'MainMod'
 
 sourceCompatibility = 1.10
-ext.moduleName = 'MainMod'
-compileJava{
+
+apply plugin: 'java-library'
+
+compileJava {
     inputs.property("moduleName", moduleName)
-    doFirst{
-        options.compilerArgs= ['--module-path', classpath.asPath, ]
-        classpath=files()
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+jar {
+    inputs.property("moduleName", moduleName)
+    manifest {
+        attributes('Automatic-Module-Name': moduleName)
     }
 }
 repositories {
