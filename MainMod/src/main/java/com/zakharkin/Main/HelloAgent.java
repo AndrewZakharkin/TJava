@@ -1,27 +1,28 @@
 package com.zakharkin.Main;
 
 import javax.management.MBeanServer;
-import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
 
 public class HelloAgent {
     private MBeanServer mbs = null;
 
     public HelloAgent()
     {
-        mbs = MBeanServerFactory.createMBeanServer( "HelloAgent" );
+        mbs = ManagementFactory.getPlatformMBeanServer();
        // com.sun.tools.attach.VirtualMachine.
         //HtmlAdaptorServer adapter = new HtmlAdaptorServer();
         HelloWorld hw = new HelloWorld();
-        ObjectName adapterName = null;
+        ObjectName additionalName = null;
         ObjectName helloWorldName = null;
         try
         {
             helloWorldName =
-                    new ObjectName( "HelloAgent:name=helloWorld1" );
+                    new ObjectName("HelloAgent:name=helloWorld");
             mbs.registerMBean( hw, helloWorldName );
-            adapterName =
-                    new ObjectName( "HelloAgent:name=htmladapter,port=9092" );
+            additionalName =
+                    new ObjectName("HelloAgent:name=additional");
+            mbs.registerMBean(hw, additionalName);
         }
         catch( Exception e )
         {

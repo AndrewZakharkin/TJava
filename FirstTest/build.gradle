@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'com.zakharkin'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.10
+ext.moduleName = 'FirstTest'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    inputs.property("moduleName", moduleName)
+    manifest {
+        attributes('Automatic-Module-Name': moduleName, 'Main-Class': 'com.zakharkin.FirstLinTest.Ent')
+    }
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

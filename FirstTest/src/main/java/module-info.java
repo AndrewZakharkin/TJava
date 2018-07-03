@@ -1,3 +1,3 @@
-module FirstLinTest{
+module FirstTest{
     exports com.zakharkin.FirstLinTest;
 }

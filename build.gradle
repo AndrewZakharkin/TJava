@@ -21,14 +21,7 @@ jar {
     }
 }
 
-subprojects {
-    afterEvaluate {
-        repositories {
-            jcenter()
-        }
-    }
-
-    /*compileJava {
+compileJava {
         inputs.property("moduleName", moduleName)
         doFirst {
             options.compilerArgs = [
@@ -36,7 +29,16 @@ subprojects {
             ]
             classpath = files()
         }
-    }*/
+    }
+
+subprojects {
+    afterEvaluate {
+        repositories {
+            jcenter()
+        }
+    }
+
+
 }
 
 dependencies {
